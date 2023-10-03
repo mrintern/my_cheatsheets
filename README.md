@@ -1,6 +1,19 @@
 # my_cheatsheets
 ### examples
 ## sql
+inner join
+```
+SELECT employees.name, departments.department_name
+FROM employees
+INNER JOIN departments ON employees.department_id = departments.id;
+```
+left join
+```
+SELECT customers.name, orders.order_date
+FROM customers
+LEFT JOIN orders ON customers.id = orders.customer_id;
+```
+
 window function example
 ```
 %sql

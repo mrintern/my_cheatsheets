@@ -1,6 +1,12 @@
 # my_cheatsheets
 ### examples
-pyspark
+## sql
+window function example
+```
+%sql
+SELECT trip_distance, fare_amount, dropoff_zip, COUNT(dropoff_zip) OVER(PARTITION BY dropoff_zip) AS dropoff_zip_count FROM samples.nyctaxi.trips ORDER BY dropoff_zip ASC;
+```
+## pyspark
 
 sql query on dataframe
 ```

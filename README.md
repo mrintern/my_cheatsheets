@@ -57,4 +57,9 @@ dbutils.fs.rm(checkpoint_path, True)
   .option("checkpointLocation", checkpoint_path)
   .trigger(availableNow=True)
   .toTable(table_name))
+
+df = spark.read.table(table_name)
+display(df)
 ```
+
+

@@ -7,6 +7,12 @@ window function example
 SELECT trip_distance, fare_amount, dropoff_zip, COUNT(dropoff_zip) OVER(PARTITION BY dropoff_zip) AS dropoff_zip_count FROM samples.nyctaxi.trips ORDER BY dropoff_zip ASC;
 ```
 ## pyspark
+explode
+```
+from pyspark.sql.functions import explode
+
+df = df.withColumn("Number", explode("Numbers")).drop("Numbers").show()
+```
 
 sql query on dataframe
 ```

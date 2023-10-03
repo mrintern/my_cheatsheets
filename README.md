@@ -6,6 +6,28 @@ window function example
 %sql
 SELECT trip_distance, fare_amount, dropoff_zip, COUNT(dropoff_zip) OVER(PARTITION BY dropoff_zip) AS dropoff_zip_count FROM samples.nyctaxi.trips ORDER BY dropoff_zip ASC;
 ```
+scd type 2
+Create a temporary view for the existing table and new table:
+```
+df.createOrReplaceTempView("existing_table")
+new_data.createOrReplaceTempView("new_data")
+
+```
+Update the date_of_birth for the records that will be expired:
+```
+spark.sql("""
+    UPDATE existing_table 
+    SET date_of_birth = (SELECT date_of_birth FROM new_data WHERE new_data.message_id = existing_table.message_id)
+    WHERE message_id IN (SELECT message_id FROM new_data)
+""")
+```
+Insert the new data into the table and set date_of_birth as NULL to mark them as the latest data changes:
+```
+spark.sql("""
+    INSERT INTO existing_table (city, date_of_birth, email, message_id, name)
+    SELECT city, NULL, email, message_id, name FROM new_data
+""")
+```
 ## pyspark
 accessing nested fields (json data)
 + 

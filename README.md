@@ -7,6 +7,19 @@ window function example
 SELECT trip_distance, fare_amount, dropoff_zip, COUNT(dropoff_zip) OVER(PARTITION BY dropoff_zip) AS dropoff_zip_count FROM samples.nyctaxi.trips ORDER BY dropoff_zip ASC;
 ```
 ## pyspark
+accessing nested fields (json data)
++ 
+explode
+```
+df = spark.read.json("/databricks-datasets/COVID/CORD-19/2020-06-04/document_parses/pdf_json/d33a044bbb52673f1eeeb792b0376b0987fe02f6.json")
+
+# acess nested field
+df2 = df.select("abstract.text")
+# explode text column
+df2 = df2.withColumn("text", explode("text"))
+df2.show()
+```
+
 explode
 ```
 from pyspark.sql.functions import explode

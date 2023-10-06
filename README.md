@@ -1,6 +1,17 @@
 # my_cheatsheets
 ### examples
 ## sql
+CASE statement
+```
+ALTER TABLE your_table ADD COLUMN triangle_type VARCHAR(50);
+
+UPDATE your_table
+SET triangle_type = CASE
+    WHEN side1 = side2 AND side2 = side3 THEN 'Equilateral'
+    WHEN side1 = side2 OR side2 = side3 OR side1 = side3 THEN 'Isosceles'
+    ELSE 'Scalene'
+END;
+```
 inner join
 ```
 SELECT employees.name, departments.department_name
